@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Portal de Algoritmos</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --text-color: #c9d1d9;
+            --accent-color: #2ea44f;
+            --border-color: #30363d;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 24px;
+            max-width: 500px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: white;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #2c974b;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #1f242c;
+            border-left: 4px solid var(--accent-color);
+            border-radius: 4px;
+            display: none;
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 12px;
+            color: #8b949e;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Repositório de Algoritmos</h1>
+        <p>Demonstração executável hospedada no GitHub Pages</p>
+    </header>
+
+    <div class="container">
+        <h2>Algoritmo: Juros Compostos</h2>
+        <p>Calcule a evolução do seu capital de forma automatizada.</p>
+        
+        <div class="form-group">
+            <label for="capital">Capital Inicial (R$):</label>
+            <input type="number" id="capital" placeholder="Ex: 1000" value="1000">
+        </div>
+
+        <div class="form-group">
+            <label for="taxa">Taxa de Juros Anual (%):</label>
+            <input type="number" id="taxa" placeholder="Ex: 10" value="12">
+        </div>
+
+        <div class="form-group">
+            <label for="tempo">Tempo (Anos):</label>
+            <input type="number" id="tempo" placeholder="Ex: 5" value="5">
+        </div>
+
+        <button onclick="executarAlgoritmo()">Calcular Montante</button>
+
+        <div class="result" id="resultadoAnuncio">
+            <strong>Resultado do Algoritmo:</strong>
+            <p id="resultadoTexto"></p>
+        </div>
+    </div>
+
+    <footer>
+        Criado via GitHub Pages e carregado dinamicamente.
+    </footer>
+
+    <script>
+        // O algoritmo matemático/lógico roda aqui no JavaScript
+        function executarAlgoritmo() {
+            // 1. Entrada de dados (Inputs)
+            const P = parseFloat(document.getElementById('capital').value);
+            const r = parseFloat(document.getElementById('taxa').value) / 100;
+            const t = parseInt(document.getElementById('tempo').value);
+
+            // Validação simples
+            if (isNaN(P) || isNaN(r) || isNaN(t)) {
+                alert("Por favor, preencha todos os campos com números válidos.");
+                return;
+            }
+
+            // 2. Processamento (Fórmula matemática do algoritmo: M = P * (1 + r)^t)
+            const M = P * Math.pow((1 + r), t);
+            const jurosGanhos = M - P;
+
+            // 3. Saída de dados (Output na tela)
+            const resultadoTexto = `Após ${t} anos, o seu capital final será de <strong>R$ ${M.toFixed(2)}</strong>.<br>O valor total em juros rendidos foi de R$ ${jurosGanhos.toFixed(2)}.`;
+            
+            document.getElementById('resultadoTexto').innerHTML = resultadoTexto;
+            document.getElementById('resultadoAnuncio').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
